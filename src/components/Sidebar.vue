@@ -2,7 +2,7 @@
     <div class="bg-white shadow overflow-hidden sm:rounded-lg md:mr-6">
     <div class="px-4 py-5 border-b border-gray-200 sm:px-6">
         <h3 class="text-lg leading-6 font-medium text-gray-900">
-            X Cart Item(s)
+            {{ cartCount }} Cart Item(s)
         </h3>
         <p class="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
             Products added to your cart
@@ -28,7 +28,7 @@
 
         <div class="bg-white px-4 py-5 sm:grid sm:grid-cols-1  sm:px-6 border-t border-gray-200">
             <dt class="text-md leading-5 font-medium text-gray-500">
-            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" @click.prevent="clearCart">
+            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded" @click="clearCart">
                 Clear cart
             </button>
             </dt>
@@ -46,18 +46,21 @@ import { mapGetters, mapActions } from 'vuex'
         computed: {
             ... mapGetters({
                 cart: 'cart',
+                cartCount: 'cartCount'
             })
         },
         methods: {
             ... mapActions({
-                removeProductFromCart: 'removeProductFromCart'
+                removeProductFromCart: 'removeProductFromCart',
+                clearCart: 'clearCart',
+                getProductsFromCart: 'getProductsFromCart'
             }),
             removeItem(item, quantity) {
                 this.removeProductFromCart(item, quantity)
             }
         },
         mounted() {
-            // this.getCartItems()
+            this.getProductsFromCart()
         }
     }
 </script>

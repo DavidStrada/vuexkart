@@ -81,7 +81,7 @@
         <header class="bg-white shadow">
             <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
             <h1 class="text-3xl font-bold leading-tight text-gray-900">
-               X items in cart <span class="bg-blue-500 text-white p-1 rounded">total</span> ($ Price)
+               {{ cartCount }} items in cart <span class="bg-blue-500 text-white p-1 rounded">${{ cartTotal }}</span>
             </h1>
             </div>
         </header>
@@ -95,7 +95,8 @@ import {mapGetters} from 'vuex'
         name: 'HeaderNav',
         computed: {
             ... mapGetters({
-
+                cartCount: 'cartCount',
+                cartTotal: 'cartTotal'
             })
         }
 
