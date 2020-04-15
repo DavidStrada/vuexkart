@@ -26,8 +26,8 @@ export const getProductsFromCart = ({commit}) => {
   })
 }
 
-export const removeProductFromCart = ({commit}, {product, quantity, index}) => {
-  commit('removeFromCart', {product, quantity, index})
+export const removeProductFromCart = ({commit}, {product, quantity}) => {
+  commit('removeFromCart', {product, quantity})
   return axios.delete(`${URL}/cart/${product.id}`).then(response => {
     return Promise.resolve(response.data)
   })
