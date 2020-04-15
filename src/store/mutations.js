@@ -21,11 +21,9 @@ export const removeFromCart = (state, {product,quantity}) => {
   if (quantity > 1) {
     productExists.quantity-- //if product exists decrease the quantity one by one e.g. 3, 2, 1
   } else {
-    // remove item from state (cart)
-    state.cart.find((item, index) => {
-      if(item.product.id === product.id) {
-        state.cart.splice(index, 1)
-      }
+    // filter item from state (cart)
+    state.cart = state.cart.filter(item => {
+      return item.product.id !== product.id
     })
   }
 }
