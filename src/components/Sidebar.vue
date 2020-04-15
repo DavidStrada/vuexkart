@@ -13,7 +13,7 @@
             <li class="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:px-6" v-for="(item, index) in cart" :key="index">
                 <span class="text-sm leading-5 font-medium text-gray-500 col-span-2">{{ item.quantity }} x {{ item.product.title }} @ ${{ item.product.price }}</span>
                 <div class="col-span-1">
-                    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-400 rounded shadow">
+                    <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-1 px-2 border border-gray-400 rounded shadow" @click="removeItem(item, item.quantity)">
                         remove
                     </button>
                 </div>
@@ -38,15 +38,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
     export default {
         name: 'Sidebar',
 
         computed: {
             ... mapGetters({
-                cart: 'cart'
+                cart: 'cart',
             })
+        },
+        methods: {
+            ... mapActions({
+                removeProductFromCart: 'removeProductFromCart'
+            }),
+            removeItem(item, quantity) {
+                this.removeProductFromCart(item, quantity)
+            }
         },
         mounted() {
             // this.getCartItems()
